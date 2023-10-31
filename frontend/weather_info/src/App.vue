@@ -1,85 +1,110 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+
+const clickMenuOption = () => {
+  if (window.getComputedStyle(buttonSidebarExpand.value).display !== "none") {
+    buttonSidebarExpand.value.click()
+  }
+}
+
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top flex-md-nowrap p-0 shadow">
+  <div class="container-fluid">
+    <router-link class="navbar-brand col-md-3 col-lg-2 me-0 px-3" :to="{ name: 'home' }" @click="clickMenuOption">
+      <img src="@/assets/logo.png" alt="" width="30" height="30" class="d-inline-block align-text-top" />
+      Weather Information
+    </router-link>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+      <div class="collapse navbar-collapse justify-content-end">
+      <ul class="navbar-nav">
+        <!-- <li class="nav-item" v-show="!userStore.user">
+            <router-link class="nav-link"
+              :class="{ active: $route.name == 'Register' && $route.params.id == userStore.userId }"
+              :to="{ name: 'Register', params: { id: userStore.userId } }" @click="clickMenuOption">
+              <i class="bi bi-person-check-fill"></i>
+                                                            Register
+              </router-link>
+            </li> -->
+        <!-- <li class="nav-item" v-show="!userStore.user">
+              <router-link class="nav-link" :class="{ active: $route.name === 'Login' }" :to="{ name: 'Login' }"
+                @click="clickMenuOption">
+                <i class="bi bi-box-arrow-in-right"></i>
+                Login
+              </router-link>
+            </li> -->
+        <!-- <li class="nav-item dropdown" v-show="userStore.user">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <img :src="userStore.userPhotoUrl" class="rounded-circle z-depth-0 avatar-img" alt="avatar image" />
+              <span class="avatar-text">{{ userStore.user?.name ?? "Anonymous" }}</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+              <li>
+                <router-link class="dropdown-item"
+                  :class="{ active: $route.name == 'User' && $route.params.id == userStore.userId }"
+                  :to="{ name: 'User', params: { id: userStore.userId } }" @click="clickMenuOption">
+                  <i class="bi bi-person-square"></i>Profile
+                </router-link>
+              </li>
+              <li>
+                <router-link class="dropdown-item" :class="{ active: $route.name === 'ChangePassword' }"
+                  :to="{ name: 'ChangePassword' }" @click="clickMenuOption">
+                  <i class="bi bi-key-fill"></i>
+                  Change password
+                </router-link>
+              </li>
+                                                          <li>
+                                                            <hr class="dropdown-divider" />
+                                                          </li>
+                                                          <li>
+                                                            <a class="dropdown-item" @click.prevent="logout">
+                                                              <i class="bi bi-arrow-right"></i>Logout
+                                                            </a>
+                                                          </li>
+                                                        </ul>
+                                                      </li> -->
+        </ul>
+      </div>
     </div>
-  </header>
+  </nav>
 
-  <RouterView />
+
+  <router-view></router-view>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+<style>
+@import "./assets/dashboard.css";
+
+.avatar-img {
+  margin: -1.2rem 0.8rem -2rem 0.8rem;
+  width: 3.3rem;
+  height: 3.3rem;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.avatar-text {
+  line-height: 2.2rem;
+  margin: 1rem 0.5rem -2rem 0;
+  padding-top: 1rem;
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+.dropdown-item {
+  font-size: 0.875rem;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.btn:focus {
+  outline: none;
+  box-shadow: none;
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+#sidebarMenu {
+  overflow-y: auto;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+#orderBtn {
+  background-color: #505050;
+  position: absolute;
+  left: 0;
+  bottom: 0;
 }
 </style>
