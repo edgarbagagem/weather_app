@@ -34,9 +34,19 @@ app.use(Toaster, {
     pauseOnHover: true
 })
 
-
-
 app.provide('toast', app.config.globalProperties.$toast);
+
+const cities = {
+    '2267056': 'Lisboa',
+    '2267094': 'Leiria',
+    '2740636': 'Coimbra',
+    '2735941': 'Porto',
+    '2268337': 'Faro',
+
+}
+
+app.provide('cities', cities)
+
 
 app.use(createPinia())
 app.use(router)

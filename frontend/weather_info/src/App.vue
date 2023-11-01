@@ -1,36 +1,29 @@
 <script setup>
-
-const clickMenuOption = () => {
-  if (window.getComputedStyle(buttonSidebarExpand.value).display !== "none") {
-    buttonSidebarExpand.value.click()
-  }
-}
-
 </script>
 
 <template>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top flex-md-nowrap p-0 shadow">
-  <div class="container-fluid">
-    <router-link class="navbar-brand col-md-3 col-lg-2 me-0 px-3" :to="{ name: 'home' }" @click="clickMenuOption">
-      <img src="@/assets/logo.png" alt="" width="30" height="30" class="d-inline-block align-text-top" />
-      Weather Information
-    </router-link>
+    <div class="container-fluid">
+      <router-link class="navbar-brand col-md-3 col-lg-2 me-0 px-3" :to="{ name: 'home' }">
+        <img src="@/assets/logo.png" alt="" width="30" height="30" class="d-inline-block align-text-top" />
+        Weather Information
+      </router-link>
 
-      <div class="collapse navbar-collapse justify-content-end">
+    <div class="collapse navbar-collapse justify-content-end">
       <ul class="navbar-nav">
         <!-- <li class="nav-item" v-show="!userStore.user">
             <router-link class="nav-link"
               :class="{ active: $route.name == 'Register' && $route.params.id == userStore.userId }"
               :to="{ name: 'Register', params: { id: userStore.userId } }" @click="clickMenuOption">
               <i class="bi bi-person-check-fill"></i>
-                                                            Register
+                                                                Register
               </router-link>
             </li> -->
         <!-- <li class="nav-item" v-show="!userStore.user">
               <router-link class="nav-link" :class="{ active: $route.name === 'Login' }" :to="{ name: 'Login' }"
                 @click="clickMenuOption">
                 <i class="bi bi-box-arrow-in-right"></i>
-                Login
+                    Login
               </router-link>
             </li> -->
         <!-- <li class="nav-item dropdown" v-show="userStore.user">
@@ -61,9 +54,9 @@ const clickMenuOption = () => {
                                                             <a class="dropdown-item" @click.prevent="logout">
                                                               <i class="bi bi-arrow-right"></i>Logout
                                                             </a>
-                                                          </li>
-                                                        </ul>
-                                                      </li> -->
+                                                              </li>
+                                                            </ul>
+                                                          </li> -->
         </ul>
       </div>
     </div>
