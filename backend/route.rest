@@ -1,0 +1,30 @@
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "name": "Edgar Bagagem",
+    "password": "12345",
+    "email": "edgar@mail.pt"
+}
+
+###
+
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "password": "12345",
+    "email": "edgar@mail.pt"
+}
+
+###
+
+POST http://localhost:3000/auth/logout
+Content-Type: application/json
+
+{
+  "_id": "6543ae1f1897a8b273c7e361",
+  "name": "Edgar Bagagem",
+  "email": "edgar@mail.pt",
+  "createdAt": "2023-11-02T14:11:43.197Z"
+}

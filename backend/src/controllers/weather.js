@@ -1,4 +1,6 @@
 const axios = require('axios')
+var fromUnixTime = require('date-fns/fromUnixTime')
+var format = require('date-fns/format')
 require('dotenv').config()
 
 const endpoint = process.env.OPEN_WEATHER_API_ENDPOINT
@@ -11,7 +13,7 @@ function getDirection(angle) {
 }
 
 
-module.exports = class weatherController {
+module.exports = class WeatherController {
 
 
     static async getWeather(req, res) {
@@ -21,13 +23,16 @@ module.exports = class weatherController {
                 let weather = {
                     main: response.data.weather[0].main,
                     description: response.data.weather[0].description,
+                    icon: 'https://openweathermap.org/img/wn/' + response.data.weather[0].icon + '@2x.png',
                     temp: (response.data.main.temp - 273.15).toFixed(0),
                     temp_min: (response.data.main.temp_min - 273.15).toFixed(0),
                     temp_max: (response.data.main.temp_max - 273.15).toFixed(0),
                     feels_like: (response.data.main.feels_like - 273.15).toFixed(0),
                     humidity: response.data.main.humidity,
                     wind_speed: response.data.wind.speed,
-                    wind_degree: getDirection(response.data.wind.deg),
+                    wind_degree: response.data.wind.deg,
+                    wind_direction: getDirection(response.data.wind.deg),
+                    time: format(fromUnixTime(response.data.dt), 'HH:mm')
                 }
                 res.send(weather)
             })
@@ -47,14 +52,16 @@ module.exports = class weatherController {
                         {
                             main: el.weather[0].main,
                             description: el.weather[0].description,
+                            icon: 'https://openweathermap.org/img/wn/' + el.weather[0].icon + '@2x.png',
                             temp: (el.main.temp - 273.15).toFixed(0),
                             temp_min: (el.main.temp_min - 273.15).toFixed(0),
                             temp_max: (el.main.temp_max - 273.15).toFixed(0),
                             feels_like: (el.main.feels_like - 273.15).toFixed(0),
                             humidity: el.main.humidity,
                             wind_speed: el.wind.speed,
-                            wind_degree: getDirection(el.wind.deg),
-                            dateTime: el.dt_txt,
+                            wind_degree: el.wind.deg,
+                            wind_direction: getDirection(el.wind.deg),
+                            dateTime: format(fromUnixTime(el.dt), 'dd/MM/yyyy HH:mm:ss'),
                         }
                     )
                 })
