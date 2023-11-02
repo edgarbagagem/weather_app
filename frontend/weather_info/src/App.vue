@@ -1,4 +1,16 @@
 <script setup>
+import { useUserStore } from "./stores/user.js"
+
+const userStore = useUserStore()
+
+const logout = async () => {
+  if (await userStore.logout()) {
+    toast.success('User has logged out of the application.')
+    router.push({ name: 'home' })
+  } else {
+    toast.error('There was a problem logging out of the application!')
+  }
+}
 </script>
 
 <template>
@@ -9,54 +21,35 @@
         Weather Information
       </router-link>
 
-    <div class="collapse navbar-collapse justify-content-end">
-      <ul class="navbar-nav">
-        <!-- <li class="nav-item" v-show="!userStore.user">
+      <div class="collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav">
+          <li class="nav-item" v-show="!userStore.user">
             <router-link class="nav-link"
               :class="{ active: $route.name == 'Register' && $route.params.id == userStore.userId }"
-              :to="{ name: 'Register', params: { id: userStore.userId } }" @click="clickMenuOption">
+              :to="{ name: 'Register' }">
               <i class="bi bi-person-check-fill"></i>
-                                                                Register
-              </router-link>
-            </li> -->
-        <!-- <li class="nav-item" v-show="!userStore.user">
-              <router-link class="nav-link" :class="{ active: $route.name === 'Login' }" :to="{ name: 'Login' }"
-                @click="clickMenuOption">
-                <i class="bi bi-box-arrow-in-right"></i>
-                    Login
-              </router-link>
-            </li> -->
-        <!-- <li class="nav-item dropdown" v-show="userStore.user">
+              Register
+            </router-link>
+          </li>
+          <li class="nav-item" v-show="!userStore.user">
+            <router-link class="nav-link" :class="{ active: $route.name === 'Login' }" :to="{ name: 'Login' }">
+              <i class="bi bi-box-arrow-in-right"></i>
+              Login
+            </router-link>
+          </li>
+          <li class="nav-item dropdown" v-show="userStore.user">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
-              <img :src="userStore.userPhotoUrl" class="rounded-circle z-depth-0 avatar-img" alt="avatar image" />
               <span class="avatar-text">{{ userStore.user?.name ?? "Anonymous" }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
               <li>
-                <router-link class="dropdown-item"
-                  :class="{ active: $route.name == 'User' && $route.params.id == userStore.userId }"
-                  :to="{ name: 'User', params: { id: userStore.userId } }" @click="clickMenuOption">
-                  <i class="bi bi-person-square"></i>Profile
-                </router-link>
+                <a class="dropdown-item" @click.prevent="logout">
+                  <i class="bi bi-arrow-right"></i>Logout
+                </a>
               </li>
-              <li>
-                <router-link class="dropdown-item" :class="{ active: $route.name === 'ChangePassword' }"
-                  :to="{ name: 'ChangePassword' }" @click="clickMenuOption">
-                  <i class="bi bi-key-fill"></i>
-                  Change password
-                </router-link>
-              </li>
-                                                          <li>
-                                                            <hr class="dropdown-divider" />
-                                                          </li>
-                                                          <li>
-                                                            <a class="dropdown-item" @click.prevent="logout">
-                                                              <i class="bi bi-arrow-right"></i>Logout
-                                                            </a>
-                                                              </li>
-                                                            </ul>
-                                                          </li> -->
+            </ul>
+          </li>
         </ul>
       </div>
     </div>

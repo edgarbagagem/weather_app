@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import weatherApp from '../components/weather/weather.vue'
-import ForecastTable from '../components/weather/ForecastTable.vue'
-
+import ForecastTable from '../components/weather/forecastTable.vue'
+import Login from '../components/auth/login.vue'
+import Register from '../components/auth/register.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -23,7 +24,17 @@ const router = createRouter({
       name: 'forecast',
       component: ForecastTable,
       props: route => ({ id: parseInt(route.params.id) })
-    }
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
+    },
   ]
 })
 
